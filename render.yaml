@@ -1,6 +1,6 @@
 databases:
   - name: learnit
-  - databaseName: learnit-database
+  - databaseName: learnit
   - user: learnit
 
 services: 
