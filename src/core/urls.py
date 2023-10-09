@@ -23,7 +23,7 @@ urlpatterns += [
     path('settings/<int:pk>/', SettingsUpdateAPIView.as_view(), name='settings_detail')
 ] 
 
-urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
+# urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
 
 urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

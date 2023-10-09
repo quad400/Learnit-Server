@@ -6,12 +6,12 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENV_PATH = BASE_DIR / '.env'
-dotenv.read_dotenv(str(ENV_PATH))
+dotenv.load_dotenv(str(ENV_PATH))
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 
-DEBUG = 'RENDER' not in os.environ
+DEBUG =  bool(int(os.environ.get("DEBUG")))
 
 ALLOWED_HOSTS = []
 
@@ -68,7 +68,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'account/template', 'course/template', 'build'],
+        'DIRS': [ BASE_DIR ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,8 +94,7 @@ DJANGO_SUPERUSER_EMAIL=os.environ.get("DJANGO_SUPERUSER_EMAIL")
 if not DEBUG:
     DATABASES = {
         'default': dj_database_url.config(
-            # Feel free to alter this value to suit your needs.
-            default='postgres://learnit_database_zpjp_user:3sDVcQ09MuCSuUyt3RSfT8h34PSPvU6k@dpg-ckhvnvce1qns73cf68a0-a/learnit_database_zpjp',
+            default=os.environ.get("DATABASE_URL"),
             conn_max_age=600
         )
 }
@@ -264,12 +263,12 @@ SITE_URL = ""
 # EMAIL_BACKEND = 'django_ses.SESBackend'
 # AWS_SES_REGION_NAME = 'us-east-1'
 # AWS_SES_REGION_EMDPOINT = 'email.us-east-1.amazonaws.com'
-if bool(int(os.environ.get("DEBUG")))==True:
-    PROTOCOL = "http"
-    DOMAIN = "localhost:3000"
-else:
-    PROTOCOL = "https"
-    DOMAIN = "learnwithus.ltlopcocigrbu.eu-west-2.cs.amazonlightsail.com"
+# if bool(int(os.environ.get("DEBUG")))==True:
+#     PROTOCOL = "http"
+#     DOMAIN = "localhost:3000"
+# else:
+#     PROTOCOL = "https"
+#     DOMAIN = "learnwithus.ltlopcocigrbu.eu-west-2.cs.amazonlightsail.com"
 
 SITE_NAME = "LearnIt"
 FROM_EMAIL = os.environ.get("EMAIL_HOST_USER")

@@ -1,0 +1,13 @@
+databases:
+  - name: learnit
+  - databaseName: learnit-database
+  - user: learnit
+
+services: 
+  - type: web
+    name: learnit
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn core.wsgi.application"
+
+        
