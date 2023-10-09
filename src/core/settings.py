@@ -13,12 +13,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 DEBUG =  bool(int(os.environ.get("DEBUG")))
 
-ALLOWED_HOSTS = []
-
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOTS").split(" ")
 
 # Application definition
 
@@ -91,15 +86,13 @@ DJANGO_SUPERUSER_EMAIL=os.environ.get("DJANGO_SUPERUSER_EMAIL")
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if not DEBUG:
-    DATABASES = {
+DATABASES = {
         'default': dj_database_url.config(
             default=os.environ.get("DATABASE_URL"),
             conn_max_age=600
         )
 }
-else: 
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
