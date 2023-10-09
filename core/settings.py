@@ -6,12 +6,12 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
-DEBUG =  os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG =  os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOTS").split(" ")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -78,8 +78,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-DJANGO_SUPERUSER_PASSWORD=os.environ.get("DJANGO_SUPERUSER_PASSWORD")
-DJANGO_SUPERUSER_EMAIL=os.environ.get("DJANGO_SUPERUSER_EMAIL")
+DJANGO_SUPERUSER_PASSWORD=os.getenv("DJANGO_SUPERUSER_PASSWORD")
+DJANGO_SUPERUSER_EMAIL=os.getenv("DJANGO_SUPERUSER_EMAIL")
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -93,7 +93,7 @@ DATABASES = {
     }
 
 DATABASES['default'] = dj_database_url.config(
-            default=os.environ.get("DATABASE_URL"),
+            default=os.getenv("DATABASE_URL"),
             conn_max_age=600
         )
 
@@ -167,12 +167,12 @@ if not DEBUG:
 
 
 # AWS_DEFAULT_ACL=None
-# AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+# AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 # AWS_S3_USE_SSL=True
 # AWS_S3_VERITY=True
 # AWS_S3_REGION_NAME="eu-west-2"
-# AWS_ACCESS_KEY_ID=os.environ.get("AWS_ACCESS_KEY_ID")
-# AWS_S3_SECRET_ACCESS_KEY=os.environ.get("AWS_S3_SECRET_ACCESS_KEY")
+# AWS_ACCESS_KEY_ID=os.getenv("AWS_ACCESS_KEY_ID")
+# AWS_S3_SECRET_ACCESS_KEY=os.getenv("AWS_S3_SECRET_ACCESS_KEY")
 # AWS_S3_CUSTOM_DOMAIN = "learnit.s3.eu-west-2.amazonaws.com"
 # file upload storage
 # DEFAULT_FILE_STORAGE = 'core.storages.MediaStorage'
@@ -228,17 +228,17 @@ CORS_ORIGIN_ALLOW_ALL = True
     Algolia configuration
 '''
 ALGOLIA = {
-    'APPLICATION_ID': os.environ.get("ALGOLIA_APPLICATION_ID"),
-    'API_KEY': os.environ.get("ALGOLIA_API_KEY"),
-    'INDEX_PREFIX': os.environ.get("ALGOLIA_INDEX_PREFIX")
+    'APPLICATION_ID': os.getenv("ALGOLIA_APPLICATION_ID"),
+    'API_KEY': os.getenv("ALGOLIA_API_KEY"),
+    'INDEX_PREFIX': os.getenv("ALGOLIA_INDEX_PREFIX")
 }
 
 '''
     Stripe Configuration
 '''
-STRIPE_SECRET_KEY=os.environ.get("STRIPE_SECRET_KEY")
-STRIPE_PUBLIC_KEY=os.environ.get("STRIPE_PUBLIC_KEY")
-STRIPE_WEBHOOK_SECRET_KEY=os.environ.get("STRIPE_WEBHOOK_SECRET_KEY")
+STRIPE_SECRET_KEY=os.getenv("STRIPE_SECRET_KEY")
+STRIPE_PUBLIC_KEY=os.getenv("STRIPE_PUBLIC_KEY")
+STRIPE_WEBHOOK_SECRET_KEY=os.getenv("STRIPE_WEBHOOK_SECRET_KEY")
 
 
 SITE_URL = ""
@@ -253,7 +253,7 @@ SITE_URL = ""
 # EMAIL_BACKEND = 'django_ses.SESBackend'
 # AWS_SES_REGION_NAME = 'us-east-1'
 # AWS_SES_REGION_EMDPOINT = 'email.us-east-1.amazonaws.com'
-# if bool(int(os.environ.get("DEBUG")))==True:
+# if bool(int(os.getenv("DEBUG")))==True:
 #     PROTOCOL = "http"
 #     DOMAIN = "localhost:3000"
 # else:
@@ -261,12 +261,12 @@ SITE_URL = ""
 #     DOMAIN = "learnwithus.ltlopcocigrbu.eu-west-2.cs.amazonlightsail.com"
 
 SITE_NAME = "LearnIt"
-FROM_EMAIL = os.environ.get("EMAIL_HOST_USER")
+FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
