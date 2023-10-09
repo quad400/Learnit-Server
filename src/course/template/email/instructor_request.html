@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% block subject %}
+  You have a request as an instructor on {{title}}
+{% endblock  %}
+
+{% block html_body %}
+    <div class="container">
+        <h3>{{title}}</h3>
+        <p>Your are sent a request to be an instructor.</p>
+        <a href="http://127.0.0.1:8000/courses/course/{{course_id}}/instructor/create/">click here</a>
+    </div>
+{% endblock %}
