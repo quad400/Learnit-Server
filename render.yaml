@@ -1,7 +1,7 @@
 databases:
   - name: learnit
-  - databaseName: learnit
-  - user: learnit
+    databaseName: learnit
+    user: learnit
 
 services: 
   - type: web
