@@ -1,17 +1,15 @@
 import os
 from pathlib import Path
 from datetime import timedelta
-import dotenv
 import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-ENV_PATH = BASE_DIR / '.env'
-dotenv.load_dotenv(str(ENV_PATH))
-
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 
-DEBUG =  bool(int(os.environ.get("DEBUG")))
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+
+DEBUG =  os.environ.get("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOTS").split(" ")
 
@@ -86,12 +84,7 @@ DJANGO_SUPERUSER_EMAIL=os.environ.get("DJANGO_SUPERUSER_EMAIL")
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ.get("DATABASE_URL"),
-            conn_max_age=600
-        )
-}
+
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -99,6 +92,10 @@ DATABASES = {
         }
     }
 
+DATABASES['default'] = dj_database_url.config(
+            default=os.environ.get("DATABASE_URL"),
+            conn_max_age=600
+        )
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
