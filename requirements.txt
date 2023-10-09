@@ -1,5 +1,5 @@
 algoliasearch-django>=2.0,<3.0
-Django==4.1.5
+Django==3.2.22
 django-shortuuidfield
 djangorestframework==3.14.0
 djoser
